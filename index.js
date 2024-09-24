@@ -64,13 +64,19 @@ const state = {
   cart: []
 };
 
-function showStoreItems(type) {
+function showStoreItems(type, sortBy) {
   let filteredItems;
   
   if (type === 'all') {
     filteredItems = state.items;
   } else {
     filteredItems = state.items.filter(item => item.type === type);
+  }
+
+  if (sortBy === 'alphabetically') {
+    filteredItems = state.items.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (sortBy === 'price') {
+    filteredItems = state.items.sort((a, b) => a.price - b.price);
   }
   
   const storeList = document.querySelector('.store--item-list');
@@ -141,9 +147,25 @@ function totalCost() {
   totalElement.textContent = `£${total.toFixed(2)}`
 }
 
-function filterOnType() {
-  const filterElement = document
+/*
+function sortItems() {
+  const storeList = document.querySelector('.store--item-list');
+
+  state.items.forEach(item => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <div class="store--item-icon">
+        <img src="assets/icons/${item.id}.svg" alt="${item.name}" />
+      </div>
+      <button>Add item to cart</button> 
+    `;
+
+    li.querySelector('button').addEventListener('click', () => addToCart(item));
+
+    storeList.appendChild(li);
+  });
 }
+  */ // Better to sort the items within the ShowStoreItems :)
 
 showStoreItems('all');
 showCartItems();

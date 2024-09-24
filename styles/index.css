@@ -77,6 +77,17 @@ button {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .store-filter:hover .dropbtn {background-color: #3e8e41;}
 
+.store-sort {
+  position: relative;
+  display: inline-block;
+}
+
+.sort {
+  color: white;
+  background-color: #04AA6D;
+  border: none;
+}
+
 .store--item-list {
   display: grid;
   grid-template-columns: repeat(4, 125px);
